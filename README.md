@@ -22,7 +22,7 @@ The computer configuration should be no less than 12 cores and 64GB of memory.
 ## Installation
 
 ```
-git clone https://github.com/XXX
+git clone https://github.com/liuhao-cn/foreground_validation
 cd XXX
 bash configure.sh
 bash file.sh
