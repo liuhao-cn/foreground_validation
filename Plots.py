@@ -156,7 +156,7 @@ for freq_name in ["10", "11", "12", "13", "14"]:
     public_function.scatter_plot("dust",     "data", "model_HD17-d7",    freq_name, "muK_CMB", threshold=3, linear_fit=True)
 
 for freq_name in ["13", "14"]:
-    public_function.scatter_plot("dust",     "data", "model_GNILC",      freq_name, "MJy_sr",  threshold=3, linear_fit=True)
+#    public_function.scatter_plot("dust",     "data", "model_GNILC",      freq_name, "MJy_sr",  threshold=3, linear_fit=True)
     public_function.scatter_plot("dust",     "data", "model_DL07",       freq_name, "MJy_sr",  threshold=3, linear_fit=True)
 
 for freq_str in ["023", "030", "033", "041", "044"]:
@@ -180,12 +180,12 @@ for freq_name in ["01", "02", "03", "04"]:
     public_function.scatter_plot("synch",     "data", "model_s7",        freq_name, "muK_CMB", threshold=0, linear_fit=True)
 
 for freq_str in ["030", "044", "070"]:
-    public_function.component_map("AME", "data",  freq_str, "muK_CMB")
-    public_function.component_map("AME", "model", freq_str, "muK_CMB")
-public_function.region(      "AME", "data",          "06", "muK_CMB")
-public_function.region(      "AME", "data",          "08", "muK_CMB")
-public_function.scatter_plot("AME", "data", "model", "06", "muK_CMB", threshold=0, linear_fit=True)
-public_function.scatter_plot("AME", "data", "model", "08", "muK_CMB", threshold=0, linear_fit=False)
+    public_function.component_map("AME",      "data",  freq_str, "muK_CMB")
+    public_function.component_map("AME",      "model", freq_str, "muK_CMB")
+public_function.region(           "AME",      "data",                    "06",      "muK_CMB")
+public_function.region(           "AME",      "data",                    "08",      "muK_CMB")
+public_function.scatter_plot(     "AME",      "data", "model",           "06",      "muK_CMB", threshold=0, linear_fit=True)
+public_function.scatter_plot(     "AME",      "data", "model",           "08",      "muK_CMB", threshold=0, linear_fit=False)
 
 for freq_str in ["030", "044", "070"]:
     public_function.component_map("free_free", "data",  freq_str, "muK_CMB")
@@ -209,7 +209,7 @@ def ratio_residual(freq_str):
     matplotlib.pyplot.figure(dpi=300, figsize=(4, 3))
     healpy.mollview(ratio, cmap="Spectral_r", format="%.3g", nlocs=3, min=MIN, max=MAX, hold=True)
     matplotlib.pyplot.title("residual / dust ("+freq_str+" GHz)", fontsize=11)
-    matplotlib.pyplot.savefig(root_dir+"/figure_residual/ratio_"+freq_str+".pdf", bbox_inches="tight")
+    matplotlib.pyplot.savefig(root_dir+"/figure_residual/ratio_"+freq_str+".png", bbox_inches="tight")
     matplotlib.pyplot.close()
     
 for freq_str in ["353", "545", "857"]:

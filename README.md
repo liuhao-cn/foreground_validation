@@ -23,7 +23,7 @@ The computer configuration should be no less than 12 cores and 64GB of memory.
 
 ```
 git clone https://github.com/liuhao-cn/foreground_validation
-cd XXX
+cd foreground_validation
 bash configure.sh
 bash file.sh
 ```
@@ -81,3 +81,4 @@ https://doi.org/10.1093/mnras/stx949
 http://doi.org/10.21105/joss.03783
 https://pysm3.readthedocs.io/en/latest/
 https://doi.org/10.1051/0004-6361/201525659
+http://sroll20.ias.u-psud.fr

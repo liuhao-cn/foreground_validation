@@ -952,7 +952,7 @@ def component_map(component, name, freq_str, unit):
         mask_map = mask_map_030 * mask_map_044 * mask_map_070 * mask_map_100 * mask_map_143 * mask_map_217 * mask_map_353 * mask_map_545 * mask_map_857
         mask_map = healpy.ud_grade(mask_map, Nside)
     if unit == "muK_CMB":
-        if freq_str == "545":
+        if freq_str == "353" or freq_str == "545":
             component_map = 1e-3 * component_map
             unit_str = "$10^3\\times\\mu\\mathrm{K_{CMB}}$"
         elif freq_str == "857":
@@ -983,7 +983,7 @@ def component_map(component, name, freq_str, unit):
 #    healpy.projview(component_map, cmap="Spectral_r", unit=unit_str, norm="none", min=0, max=MAX, format="%.4g", extend="neither", hold=True)
     healpy.mollview(component_map, cmap="Spectral_r", norm="none", min=MIN, max=MAX, format="%.3g", nlocs=3, bgcolor="white", hold=True)
     matplotlib.pyplot.title(title, fontsize=11)
-    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/"+component+"_map_"+name+"_"+unit+"_"+freq_str+"GHz.pdf", bbox_inches="tight")
+    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/"+component+"_map_"+name+"_"+unit+"_"+freq_str+"GHz.png", bbox_inches="tight")
     matplotlib.pyplot.close()
 
 # Sky maps for R(model), R'(data), C(model), C'(data), where C is correlation
@@ -1033,30 +1033,30 @@ def map_plot(component, data_name, model_name, freq_name, unit):
     valid_points = numpy.where(mosaic_model[0] > -10000000)[0]
     MIN = numpy.percentile(mosaic_model[0][valid_points],10)
     MAX = numpy.percentile(mosaic_model[0][valid_points],90)
-    matplotlib.pyplot.figure(dpi=100, figsize=(3.6,3.6))
+    matplotlib.pyplot.figure(dpi=150, figsize=(3.6,3.6))
     healpy.mollview(mosaic_model[0], nlocs=3, nest=False, min=MIN, max=MAX, cmap="Spectral_r", format="%.4g", hold=True)
     matplotlib.pyplot.title("$R$ of "+str_name+" ("+unit_str+")\n model = "+model_name.lstrip("model_"), fontsize=13)
-    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/R_"+model_name+"_"+unit+"_"+freq_name+".pdf", bbox_inches="tight")
+    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/R_"+model_name+"_"+unit+"_"+freq_name+".png", bbox_inches="tight")
     matplotlib.pyplot.close()
 
     # R' (data)
     valid_points = numpy.where(mosaic_data[0] > -10000000)[0]
     MIN = numpy.percentile(mosaic_data[0][valid_points],10)
     MAX = numpy.percentile(mosaic_data[0][valid_points],90)
-    matplotlib.pyplot.figure(dpi=100, figsize=(3.6,3.6))
+    matplotlib.pyplot.figure(dpi=150, figsize=(3.6,3.6))
     healpy.mollview(mosaic_data[0], nlocs=3, nest=False, min=MIN, max=MAX, cmap="Spectral_r", format="%.4g", hold=True)
     matplotlib.pyplot.title("$R'$ of "+str_name+" ("+unit_str+")\n data", fontsize=13)
-    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/R_"+data_name+"_"+unit+"_"+freq_name+".pdf", bbox_inches="tight")
+    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/R_"+data_name+"_"+unit+"_"+freq_name+".png", bbox_inches="tight")
     matplotlib.pyplot.close()
 
     # Correlation between two neighbouring frequency channels (data)
     valid_points = numpy.where(mosaic_data[1] > -10000000)[0]
     MIN = numpy.percentile(mosaic_data[1][valid_points],10)
     MAX = numpy.percentile(mosaic_data[1][valid_points],90)
-    matplotlib.pyplot.figure(dpi=100, figsize=(3.6,3.6))
+    matplotlib.pyplot.figure(dpi=150, figsize=(3.6,3.6))
     healpy.mollview(mosaic_data[1], nlocs=3, nest=False, min=MIN, max=MAX, cmap="Spectral_r", format="%.3g", hold=True)
     matplotlib.pyplot.title("$C'$ of "+str_name, fontsize=13)
-    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/C_"+data_name+"_"+unit+"_"+freq_name+".pdf", bbox_inches="tight")
+    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/C_"+data_name+"_"+unit+"_"+freq_name+".png", bbox_inches="tight")
     matplotlib.pyplot.close()
     return 1
 
@@ -1103,10 +1103,10 @@ def region(component, data_name, freq_name, unit):
     pixel_list = numpy.where(mosaic_data[2]==1)[0]
     # fraction_reliable = reliable region / valid region
     fraction_reliable = numpy.array(pixel_list).shape[0]/numpy.array(total_pixel_list).shape[0]
-    matplotlib.pyplot.figure(dpi=100, figsize=(4,4))
+    matplotlib.pyplot.figure(dpi=150, figsize=(4,4))
     healpy.mollview(mosaic_data[2], cmap="jet", min=0, max=2, cbar=False, hold=True)
     matplotlib.pyplot.title("Reliable region, "+str_name+"\n $f_\mathrm{rel} = $"+"{:.1f}".format(100*fraction_reliable)+"%", fontsize=13)
-    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/Region_"+data_name+"_"+unit+"_"+freq_name+".pdf", bbox_inches="tight")
+    matplotlib.pyplot.savefig(root_dir+"/figure_"+component+"/Region_"+data_name+"_"+unit+"_"+freq_name+".png", bbox_inches="tight")
     matplotlib.pyplot.close()
 
 # Scatter plots for dust (data) and the sky map for the points in the scatter plots
